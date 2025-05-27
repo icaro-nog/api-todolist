@@ -12,6 +12,8 @@ class Task extends Controller
 
         $validator = Validator::make($request->all(), [
             'title' => 'required|string',
+            'status' => 'integer|between:1,3',
+            'description' => 'string'
         ]);
 
         if ($validator->fails()) {
@@ -25,5 +27,17 @@ class Task extends Controller
         $newTask = TaskModel::create($validated);
 
         return response()->json(['task' => $newTask], 201);
+    }
+
+    public function getTasks(){
+        $tasks = TaskModel::all();
+
+        return response()->json(['tasks' => $tasks], 200);
+    }
+
+    public function getTasksByStatus(int $status){
+        $tasks = TaskModel::where('status', $status)->get();
+
+        return response()->json(['tasks' => $tasks], 200);
     }
 }

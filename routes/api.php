@@ -10,3 +10,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::post('task', [Task::class, 'createTask']);
+
+Route::get('tasks', [Task::class, 'getTasks']);
+
+Route::get('tasks/status/{status}', [Task::class, 'getTasksByStatus']);
