@@ -16,3 +16,5 @@ Route::get('tasks', [Task::class, 'getTasks']);
 Route::get('tasks/status/{status}', [Task::class, 'getTasksByStatus']);
 
 Route::put('task/{id}', [Task::class, 'editTask']);
+
+Route::delete('task/{id}', [Task::class, 'deleteTask']);

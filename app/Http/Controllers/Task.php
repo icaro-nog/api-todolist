@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateTaskRequest;
 use App\Http\Requests\UpdateTaskStatusRequest;
 use App\Models\Task as TaskModel;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Task extends Controller
 {
@@ -29,8 +30,24 @@ class Task extends Controller
     }
 
     public function editTask(int $id, UpdateTaskStatusRequest $request){
-        $task = TaskModel::findOrFail($id);
-        $task->update($request->validated());
-        return response()->json(['task' => $task], 200);
+        try{
+            $task = TaskModel::findOrFail($id);
+            $task->update($request->validated());
+
+            return response()->json(['task' => $task], 200);
+        } catch(ModelNotFoundException $e){
+            return response()->json(['error' => 'Task not found.'], 404);
+        }
+    }
+
+    public function deleteTask(int $id){
+        try {
+            $task = TaskModel::findOrFail($id);
+            $task->delete();
+
+            return response()->json(['message' => 'Task deleted successfully.'], 200);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['error' => 'Task not found.'], 404);
+        }
     }
 }
