@@ -9,8 +9,10 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::post('task', [Task::class, 'createTask']);
+Route::post('/task', [Task::class, 'createTask']);
 
 Route::get('tasks', [Task::class, 'getTasks']);
 
 Route::get('tasks/status/{status}', [Task::class, 'getTasksByStatus']);
+
+Route::put('task/{id}', [Task::class, 'editTask']);
