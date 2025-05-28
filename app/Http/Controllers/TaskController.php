@@ -8,7 +8,7 @@ use App\Models\Task as TaskModel;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use OpenApi\Annotations as OA;
 
-class Task extends Controller
+class TaskController extends Controller
 {
     /**
      * @OA\Post(
