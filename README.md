@@ -154,7 +154,7 @@ Resposta esperada:
 	}
 }
 ```
-### Rota DELETE para exclusão de tarefa
+### Rota DELETE para exclusão de tarefa, deve ser passado o id da tarefa como parâmetro
 ```
 http://127.0.0.1:8000/api/task/4
 ```
@@ -165,22 +165,31 @@ Resposta esperada:
 }
 ```
 
+## Observação
+Tratamento foi realizado em todas as requisições inesperadas, para a rota DELETE, por exemplo, 
+caso seja realizada uma requisição para um id inexistente no banco de dados, será retornado algo como:
+```
+{
+	"error": "Task not found."
+}
+```
+
+## Teste unitários
+O controller de testes, está em ```to-do-list/tests/Feature/TaskControllerTest.php```
+Para rodar os testes, é necessário executar o seguinte comando na raiz do projeto
+```
+php artisan test
+```
+
+## Documentação da API realizada no Swagger
+```
+http://127.0.0.1:8000/api/documentation
+```
 
 
-
-### Rotas para gerenciamento de informações
-* Listagem (GET): ``` http://127.0.0.1:8000/api/v1/users ```
-* Leitura de usuário em específico (GET): ``` http://127.0.0.1:8000/api/v1/users/{id} ```
-* Edição (PUT): ``` http://127.0.0.1:8000/api/v1/users/{id} ```
-* Exclusão (DELETE): ``` http://127.0.0.1:8000/api/v1/users/{id} ```
-
-## Pontuação de melhorias
+## Pontuação de possíveis melhorias
 * Captura de logs para coleta de possíveis erros
 * Sanitização dos campos dos formulários
-* Ter uma rotina de testes, pode ser utilizado o PHPUnit
-* Paginação da listagem de registros
-* Data de validade do token
-* Validar se email já está em uso
-* Senha forte
+* Paginação da listagem de tarefas
 
 
