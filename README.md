@@ -89,7 +89,7 @@ Resposta esperada:
 ```
 http://127.0.0.1:8000/api/tasks
 ```
-Exemplo de resposta:
+Resposta esperada:
 ```
 {
 	"tasks": [
@@ -116,9 +116,54 @@ Exemplo de resposta:
 ```
 http://127.0.0.1:8000/api/tasks/status/3
 ```
-
-
-
+Resposta esperada:
+```
+{
+	"tasks": [
+		{
+			"id": 4,
+			"title": "tarefa 4",
+			"description": "desc tarefa 4",
+			"status": 3,
+			"created_at": "2025-05-27T18:38:45.000000Z",
+			"updated_at": "2025-05-28T22:03:07.000000Z"
+		},
+      ]
+}
+```
+### Rota PUT para atualização de status de tarefa, deve ser passado o id da tarefa como parâmetro
+```
+http://127.0.0.1:8000/api/task/4
+```
+Exemplo de requisição em JSON no body, deve ser passado o valor do novo status:
+```
+{
+  "status": 2 // between 1, 3
+}
+```
+Resposta esperada:
+```
+{
+	"task": {
+		"id": 4,
+		"title": "tarefa 4",
+		"description": "desc tarefa 4",
+		"status": 1,
+		"created_at": "2025-05-27T18:38:45.000000Z",
+		"updated_at": "2025-05-30T15:45:23.000000Z"
+	}
+}
+```
+### Rota DELETE para exclusão de tarefa
+```
+http://127.0.0.1:8000/api/task/4
+```
+Resposta esperada:
+```
+{
+	"message": "Task deleted successfully."
+}
+```
 
 
 
