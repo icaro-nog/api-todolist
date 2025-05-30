@@ -72,9 +72,19 @@ A requisição pode ser feita passando os dados em formato JSON através do Body
   "status": 2 // between 1, 3
 }
 ```
-Exemplo de resposta:
-///////
-
+Resposta esperada:
+```
+{
+	"task": {
+		"title": "Nova tarefa",
+		"status": 2,
+		"description": "Descrição opcional",
+		"updated_at": "2025-05-29T20:39:33.000000Z",
+		"created_at": "2025-05-29T20:39:33.000000Z",
+		"id": 19
+	}
+}
+```
 ### Rota GET para listagem de tarefas
 ```
 http://127.0.0.1:8000/api/tasks
@@ -82,11 +92,32 @@ http://127.0.0.1:8000/api/tasks
 Exemplo de resposta:
 ```
 {
-  "title": "Nova tarefa", // required
-  "description": "Descrição opcional", // nullable
-  "status": 2 // between 1, 3
+	"tasks": [
+		{
+			"id": 2,
+			"title": "tarefa 1",
+			"description": "desc tarefa 1",
+			"status": 1,
+			"created_at": "2025-05-27T16:00:14.000000Z",
+			"updated_at": "2025-05-27T16:00:14.000000Z"
+		},
+		{
+			"id": 4,
+			"title": "tarefa 4",
+			"description": "desc tarefa 4",
+			"status": 3,
+			"created_at": "2025-05-27T18:38:45.000000Z",
+			"updated_at": "2025-05-28T22:03:07.000000Z"
+		},
+    ]
 }
 ```
+### Rota GET para listagem de tarefas por status, pode ser passado o parâmetro entre 1 e 3 (pendente(1), em andamento(2) ou concluída(3))
+```
+http://127.0.0.1:8000/api/tasks/status/3
+```
+
+
 
 
 
